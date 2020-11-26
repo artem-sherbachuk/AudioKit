@@ -1,10 +1,10 @@
-//
-//  AKSequencerEngine.h
-//  AudioKit
-//
-//  Created by Jeff Cooper on 1/25/19.
-//  Copyright © 2019 AudioKit. All rights reserved.
-//
+    //
+    //  AKSequencerEngine.h
+    //  AudioKit
+    //
+    //  Created by Jeff Cooper on 1/25/19.
+    //  Copyright © 2019 AudioKit. All rights reserved.
+    //
 
 #pragma once
 #import "AKAudioUnit.h"
@@ -22,6 +22,7 @@ typedef void (^AKCCallback)(void);
 @property (nonatomic) AKCCallback loopCallback;
 
 -(void)setTarget:(AudioUnit)target;
+- (void)setMidiEndpoint:(MIDIEndpointRef)refference;
 -(void)addMIDIEvent:(uint8_t)status
               data1:(uint8_t)data1
               data2:(uint8_t)data2

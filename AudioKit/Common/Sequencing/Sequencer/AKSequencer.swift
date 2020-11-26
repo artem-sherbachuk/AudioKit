@@ -157,6 +157,13 @@ open class AKSequencer {
         tracks.append(track)
         return track
     }
+
+    /// Set the midi output for all tracks
+    open func setGlobalMIDIOutput(_ midiEndpoint: MIDIEndpointRef) {
+        for track in tracks {
+            track.setMIDIOutput(midiEndpoint)
+        }
+    }
 }
 
 /* functions from AKAppleSequencer  to implement

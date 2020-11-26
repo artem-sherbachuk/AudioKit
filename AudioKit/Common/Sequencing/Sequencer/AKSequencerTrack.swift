@@ -27,41 +27,41 @@ open class AKSequencerTrack: AKNode, AKComponent {
     }
 
     /// Length of the track in beats
-    public var length: Double {
+    open var length: Double {
         get { return internalAU?.length ?? 0 }
         set { internalAU?.length = newValue }
     }
 
     /// Speed of the track in beats per minute
-    public var tempo: BPM {
+    open var tempo: BPM {
         get { return internalAU?.tempo ?? 0 }
         set { internalAU?.tempo = newValue }
     }
 
     /// Maximum number of times to play, ie. loop the track
-    public var maximumPlayCount: Double {
+    open var maximumPlayCount: Double {
         get { return internalAU?.maximumPlayCount ?? 0 }
         set { internalAU?.maximumPlayCount = newValue }
     }
 
-    public var seqEnabled: Bool {
+    open var seqEnabled: Bool {
         set { internalAU?.seqEnabled = newValue }
         get { return internalAU?.seqEnabled ?? false }
     }
 
     /// Is looping enabled?
-    public var loopEnabled: Bool {
+    open var loopEnabled: Bool {
         set { internalAU?.loopEnabled = newValue }
         get { return internalAU?.loopEnabled ?? false }
     }
 
     /// Is the track currently playing?
-    public var isPlaying: Bool {
+    open var isPlaying: Bool {
         return internalAU?.isPlaying ?? false
     }
 
     /// Current position of the track
-    public var currentPosition: Double {
+    open var currentPosition: Double {
         return internalAU?.currentPosition ?? 0
     }
 
@@ -93,40 +93,40 @@ open class AKSequencerTrack: AKNode, AKComponent {
     }
 
     /// Set the target node
-    public func setTarget(node: AKNode) {
+    open func setTarget(node: AKNode) {
         targetNode = node
         internalAU?.setTarget(targetNode?.avAudioUnit?.audioUnit)
     }
 
     /// Start the track
-    public func play() {
+    open func play() {
         internalAU?.start()
     }
 
     /// Start the track from the beginning
-    public func playFromStart() {
+    open func playFromStart() {
         seek(to: 0)
         internalAU?.start()
     }
 
     /// Start the track after a certain delay in beats
-    public func playAfterDelay(beats: Double) {
+    open func playAfterDelay(beats: Double) {
         seek(to: -1 * beats)
         internalAU?.start()
     }
 
     /// Stop playback
-    public func stop() {
+    open func stop() {
         internalAU?.stop()
     }
 
     /// Set the current position to the start ofthe track
-    public func rewind() {
+    open func rewind() {
         internalAU?.rewind()
     }
 
     /// Move to a position in the track
-    public func seek(to position: Double) {
+    open func seek(to position: Double) {
         internalAU?.seek(to: position)
     }
 
@@ -174,5 +174,13 @@ open class AKSequencerTrack: AKNode, AKComponent {
     /// Stop playing all the notes current in the "now playing" array.
     open func stopPlayingNotes() {
         internalAU?.stopPlayingNotes()
+    }
+
+    /// Set the MIDI Ouput
+    ///
+    /// - parameter endpoint: MIDI Endpoint Port
+    ///
+    open func setMIDIOutput(_ endpoint: MIDIEndpointRef) {
+        internalAU?.setMidiEndpoint(endpoint)
     }
 }
